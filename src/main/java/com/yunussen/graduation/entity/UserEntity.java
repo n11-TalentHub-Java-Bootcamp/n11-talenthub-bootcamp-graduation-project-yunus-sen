@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user_")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,9 +29,4 @@ public class UserEntity extends BaseEntity {
     private Date birthDate;
     @Column(name = "assurance",scale = 3)
     private Double assurance;
-    @Enumerated(EnumType.STRING)
-    private UserType userType;
-
-
-
 }

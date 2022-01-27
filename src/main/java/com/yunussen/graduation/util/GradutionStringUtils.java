@@ -7,7 +7,7 @@ public class GradutionStringUtils {
     private static UUID uuid;
 
     public static String generatePublicId() {
-        UUID.randomUUID();
+        uuid=UUID.randomUUID();
         return uuid.toString();
     }
 }
