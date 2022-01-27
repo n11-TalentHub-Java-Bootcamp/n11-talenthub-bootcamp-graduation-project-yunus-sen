@@ -1,4 +1,4 @@
-package com.yunussen.graduation.model.response;
+package com.yunussen.graduation.entity;
 
 import lombok.Getter;
 

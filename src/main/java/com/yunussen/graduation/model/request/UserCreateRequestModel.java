@@ -18,5 +18,5 @@ public class UserCreateRequestModel {
     private Double monthlyIncome;
     @NotNull(message = "bithdate must not be empty")
     private Date birthDate;
-    private Double assurance;
+    private double assurance;
 }

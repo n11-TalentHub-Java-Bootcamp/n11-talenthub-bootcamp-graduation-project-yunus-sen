@@ -25,7 +25,7 @@ public class UserEntity extends BaseEntity {
     @Column(name = "monthly_income" , scale=3,nullable =false)
     private Double monthlyIncome;
     @Temporal(TemporalType.DATE)
-    @Column(name = "bithdate")
+    @Column(name = "birthdate")
     private Date birthDate;
     @Column(name = "assurance",scale = 3)
     private Double assurance;

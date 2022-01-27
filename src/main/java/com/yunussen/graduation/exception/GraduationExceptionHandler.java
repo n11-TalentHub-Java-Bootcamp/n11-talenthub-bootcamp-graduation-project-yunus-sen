@@ -14,9 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ControllerAdvice
-public class GraduationExceptionHanler extends ResponseEntityExceptionHandler {
+public class GraduationExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Error> handleException(UserNotFoundException e) {
+    public ResponseEntity<Error> userHandleException(UserNotFoundException e) {
+        Error error = new Error(HttpStatus.NOT_FOUND, e.getMessage());
+        return new ResponseEntity<>(error, error.getHttpStatus());
+    }
+
+    @ExceptionHandler(CreditScoreNotFound.class)
+    public ResponseEntity<Error> creditScorehandleException(UserNotFoundException e) {
         Error error = new Error(HttpStatus.NOT_FOUND, "UserNot found.");
         return new ResponseEntity<>(error, error.getHttpStatus());
     }
