@@ -9,6 +9,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Component
@@ -26,7 +28,7 @@ public class InitializerData {
         user.setMonthlyIncome(100.0);
         user.setNameSurname("yunus şen");
         user.setIdentityNumber("17838043128");
-        user.setBirthDate(new Date());
+        user.setBirthDate(Date.from(Instant.parse("1998-04-18T00:00:00.000Z")));
         user.setPhoneNumber("17838043128");
         user.setAssurance(100.0);
         UserEntity storedUser;
