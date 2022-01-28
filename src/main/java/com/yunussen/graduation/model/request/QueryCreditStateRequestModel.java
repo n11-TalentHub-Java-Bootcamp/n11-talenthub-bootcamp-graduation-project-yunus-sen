@@ -1,6 +1,7 @@
 package com.yunussen.graduation.model.request;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class QueryCreditStateRequestModel {
     @NotBlank(message = "Identity number not emty.")
     private String identityNumber;

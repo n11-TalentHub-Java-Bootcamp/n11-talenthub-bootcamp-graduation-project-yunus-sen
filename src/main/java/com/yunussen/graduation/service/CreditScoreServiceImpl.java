@@ -4,7 +4,8 @@ import com.yunussen.graduation.entity.CreditEntity;
 import com.yunussen.graduation.entity.CreditResult;
 import com.yunussen.graduation.entity.CreditScoreEntity;
 import com.yunussen.graduation.entity.UserEntity;
-import com.yunussen.graduation.exception.CreditScoreNotFound;
+import com.yunussen.graduation.exception.CreditScoreNotFoundException;
+import com.yunussen.graduation.exception.NotFoundCreditException;
 import com.yunussen.graduation.exception.UserNotFoundException;
 import com.yunussen.graduation.model.NotificationModel;
 import com.yunussen.graduation.model.request.QueryCreditStateRequestModel;
@@ -34,7 +35,7 @@ public class CreditScoreServiceImpl implements CreditScoreService {
     public CreditResult queryCreditResultOfUser(String identityNumber) {
 
         UserEntity user = userRepository.findByIdentityNumber(identityNumber).orElseThrow(UserNotFoundException::new);
-        CreditScoreEntity creditScoreEntity = creditScoreRepository.findByUserId(user.getId()).orElseThrow(CreditScoreNotFound::new);
+        CreditScoreEntity creditScoreEntity = creditScoreRepository.findByUserId(user.getId()).orElseThrow(CreditScoreNotFoundException::new);
 
         Double creditScore = creditScoreEntity.getCreditScore();
         CreditEntity creditEntity = new CreditEntity();
@@ -57,8 +58,11 @@ public class CreditScoreServiceImpl implements CreditScoreService {
 
     @Override
     public CreditResult queryCrediState(QueryCreditStateRequestModel model) {
-        UserEntity user=userRepository.findByIdentityNumberAndAndBirthDate(model.getIdentityNumber(), model.getBirthDate())
-                .orElseThrow(()->new UserNotFoundException("User id and birthdate did not match"));
+        UserEntity user = userRepository.findByIdentityNumberAndAndBirthDate(model.getIdentityNumber(), model.getBirthDate())
+                .orElseThrow(() -> new UserNotFoundException("User id and birthdate did not match"));
+        if (creditRepository.findByUserIdOrderByCreatedAtDesc(user.getId()).isEmpty()) {
+            throw new NotFoundCreditException("User credit not found! User Public Id: " + user.getPublicId());
+        }
         return creditRepository.findByUserIdOrderByCreatedAtDesc(user.getId()).get(0).getCreditResult();
     }
 

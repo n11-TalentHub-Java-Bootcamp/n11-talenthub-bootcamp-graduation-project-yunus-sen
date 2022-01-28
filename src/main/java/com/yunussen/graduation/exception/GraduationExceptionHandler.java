@@ -21,19 +21,25 @@ public class GraduationExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, error.getHttpStatus());
     }
 
-    @ExceptionHandler(CreditScoreNotFound.class)
+    @ExceptionHandler(CreditScoreNotFoundException.class)
     public ResponseEntity<Error> creditScorehandleException(UserNotFoundException e) {
         Error error = new Error(HttpStatus.NOT_FOUND, "UserNot found.");
+        return new ResponseEntity<>(error, error.getHttpStatus());
+    }
+
+    @ExceptionHandler(NotFoundCreditException.class)
+    public ResponseEntity<Error> creditNotFoundException(NotFoundCreditException e) {
+        Error error = new Error(HttpStatus.NOT_FOUND, e.getMessage());
         return new ResponseEntity<>(error, error.getHttpStatus());
     }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<String> details = new ArrayList<>();
-        for(ObjectError error : ex.getBindingResult().getAllErrors()) {
+        for (ObjectError error : ex.getBindingResult().getAllErrors()) {
             details.add(error.getDefaultMessage());
         }
-        Error error = new Error(HttpStatus.BAD_REQUEST,"Validation Error", details);
+        Error error = new Error(HttpStatus.BAD_REQUEST, "Validation Error", details);
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
