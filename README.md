@@ -1,5 +1,4 @@
-### <i class="fas fa-puzzle-piece" aria-hidden="true"></i> Puzzle Icon
-{: #puzzle}
+## Proje ilk calıştıştıgında 1 defalık olarak database'e : identity nosu **"17838043128"** ve birthdate **"1998-04-18"** olan bir user ve buna ait kredi skor tablosu oluşturur.
 
 # DOCKER-COMPOSE ile Çalıştırılması:
 1. Ana dizinde bulunan docker-compose dosyasının bulundugu klosörde terminal acıp
