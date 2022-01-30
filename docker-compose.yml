@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   graduation-api:
-    image: graduation:0.0.1
+    image: yunussen/n11-graduation:0.0.1
     container_name: graduation-api
     environment:
       DDL_AUTO: update
