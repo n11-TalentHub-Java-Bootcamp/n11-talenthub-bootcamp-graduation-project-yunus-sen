@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  graduation-api:
+    image: graduation:0.0.1
+    container_name: graduation-api
+    environment:
+      DDL_AUTO: update
+      DATASOURCE_URL: jdbc:postgresql://graduation-postgres:5432/n11_graduation
+      DATASOURCE_USERNAME: admin
+      DATASOURCE_PASSWORD: 123456
+    ports:
+      - "8080:8080"
+
+  graduation-postgres:
+    image: postgres:11-alpine
+    container_name: graduation-postgres
+    environment:
+      POSTGRES_DB: n11_graduation
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123456
+      PGDATA: /data/postgres
+    ports:
+      - "5532:5432"
+    restart: "no"
+    volumes:
+      - /home/n11-gradution/setup/postgres/data:/data

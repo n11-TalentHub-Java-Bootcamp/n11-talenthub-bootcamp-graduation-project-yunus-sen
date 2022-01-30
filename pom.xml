@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.yunussen</groupId>
 	<artifactId>graduation</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>graduation</name>
 	<description>n11 graduation homework</description>
 	<properties>
@@ -90,6 +90,43 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.38.1</version>
+
+				<configuration>
+					<images>
+						<image>
+							<alias>service</alias>
+							<name>${project.artifactId}:${project.version}</name>
+							<build>
+								<from>openjdk:11</from>
+								<entryPoint>
+									<exec>
+										<args>java</args>
+										<args>-jar</args>
+										<args>/maven/${project.artifactId}-${project.version}.jar</args>
+									</exec>
+								</entryPoint>
+								<assembly>
+									<descriptorRef>artifact</descriptorRef>
+								</assembly>
+							</build>
+						</image>
+					</images>
+				</configuration>
+				<executions>
+					<execution>
+						<id>build</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

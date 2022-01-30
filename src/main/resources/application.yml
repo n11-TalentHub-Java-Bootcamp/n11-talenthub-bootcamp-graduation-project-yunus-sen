@@ -1,13 +1,13 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/n11_gradution
-    username: postgres
-    password: Passwordw
+    url: ${DATASOURCE_URL:jdbc:postgresql://127.0.0.1:5432/n11_gradution}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:Passwordw}
   jpa:
     show-sql: true
     generate-ddl: true
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: ${DDL_AUTO:update}
 
 server:
   error:
